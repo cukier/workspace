@@ -1,0 +1,330 @@
+CCS PCH C Compiler, Version 5.008, 5967               30-Mar-14 20:21
+
+               Filename:   C:\Users\cuki\workspace\ShiftRegister\ShiftRegister.lst
+
+               ROM used:   506 bytes (2%)
+                           Largest free fragment is 32262
+               RAM used:   6 (0%) at main() level
+                           14 (1%) worst case
+               Stack used: 3 locations
+               Stack size: 31
+
+*
+0000:  GOTO   0190
+.................... /* 
+....................  * ShiftRegister.c 
+....................  * 
+....................  *  Created on: Mar 30, 2014 
+....................  *      Author: cuki 
+....................  */ 
+....................  
+.................... #include <18F45K20.h> 
+.................... //////// Standard Header file for the PIC18F45K20 device //////////////// 
+.................... #device PIC18F45K20 
+*
+00A4:  MOVF   0D,W
+00A6:  CLRF   01
+00A8:  SUBWF  0C,W
+00AA:  BC    00B2
+00AC:  MOVFF  0C,00
+00B0:  BRA    00CA
+00B2:  CLRF   00
+00B4:  MOVLW  08
+00B6:  MOVWF  0E
+00B8:  RLCF   0C,F
+00BA:  RLCF   00,F
+00BC:  MOVF   0D,W
+00BE:  SUBWF  00,W
+00C0:  BTFSC  FD8.0
+00C2:  MOVWF  00
+00C4:  RLCF   01,F
+00C6:  DECFSZ 0E,F
+00C8:  BRA    00B8
+00CA:  RETURN 0
+00CC:  MOVLW  20
+00CE:  BTFSS  07.4
+00D0:  MOVLW  30
+00D2:  MOVWF  08
+00D4:  MOVFF  06,00
+00D8:  BTFSS  06.7
+00DA:  BRA    00EC
+00DC:  COMF   00,F
+00DE:  INCF   00,F
+00E0:  MOVFF  00,06
+00E4:  MOVLW  2D
+00E6:  MOVWF  08
+00E8:  BSF    07.7
+00EA:  BSF    07.0
+00EC:  MOVF   01,W
+00EE:  MOVFF  06,0C
+00F2:  MOVLW  64
+00F4:  MOVWF  0D
+00F6:  RCALL  00A4
+00F8:  MOVFF  00,06
+00FC:  MOVLW  30
+00FE:  ADDWF  01,W
+0100:  MOVWF  09
+0102:  MOVFF  06,0C
+0106:  MOVLW  0A
+0108:  MOVWF  0D
+010A:  RCALL  00A4
+010C:  MOVLW  30
+010E:  ADDWF  00,W
+0110:  MOVWF  0B
+0112:  MOVLW  30
+0114:  ADDWF  01,W
+0116:  MOVWF  0A
+0118:  MOVFF  08,00
+011C:  MOVLW  30
+011E:  SUBWF  09,W
+0120:  BZ    012A
+0122:  BSF    07.1
+0124:  BTFSC  07.7
+0126:  BSF    07.2
+0128:  BRA    014E
+012A:  MOVFF  08,09
+012E:  MOVLW  20
+0130:  MOVWF  08
+0132:  MOVLW  30
+0134:  SUBWF  0A,W
+0136:  BZ    0140
+0138:  BSF    07.0
+013A:  BTFSC  07.7
+013C:  BSF    07.1
+013E:  BRA    014E
+0140:  BTFSS  FD8.2
+0142:  BSF    07.0
+0144:  BNZ   014E
+0146:  MOVFF  09,0A
+014A:  MOVLW  20
+014C:  MOVWF  09
+014E:  BTFSC  07.2
+0150:  BRA    015C
+0152:  BTFSC  07.1
+0154:  BRA    0162
+0156:  BTFSC  07.0
+0158:  BRA    0168
+015A:  BRA    016E
+015C:  MOVFF  08,0C
+0160:  RCALL  0064
+0162:  MOVFF  09,0C
+0166:  RCALL  0064
+0168:  MOVFF  0A,0C
+016C:  RCALL  0064
+016E:  MOVFF  0B,0C
+0172:  RCALL  0064
+0174:  GOTO   01E0 (RETURN)
+....................  
+.................... #list 
+....................  
+....................  
+.................... #use delay(clock=4MHz) 
+*
+0004:  CLRF   FEA
+0006:  MOVLW  08
+0008:  MOVWF  FE9
+000A:  MOVF   FEF,W
+000C:  BZ    002A
+000E:  MOVLW  01
+0010:  MOVWF  01
+0012:  CLRF   00
+0014:  DECFSZ 00,F
+0016:  BRA    0014
+0018:  DECFSZ 01,F
+001A:  BRA    0012
+001C:  MOVLW  4A
+001E:  MOVWF  00
+0020:  DECFSZ 00,F
+0022:  BRA    0020
+0024:  BRA    0026
+0026:  DECFSZ FEF,F
+0028:  BRA    000E
+002A:  RETURN 0
+.................... #use rs232(xmit=PIN_C6, baud=9600) 
+*
+0064:  BCF    F94.6
+0066:  BCF    F8B.6
+0068:  MOVLW  08
+006A:  MOVWF  01
+006C:  BRA    006E
+006E:  NOP   
+0070:  BSF    01.7
+0072:  BRA    0090
+0074:  BCF    01.7
+0076:  RRCF   0C,F
+0078:  BTFSC  FD8.0
+007A:  BSF    F8B.6
+007C:  BTFSS  FD8.0
+007E:  BCF    F8B.6
+0080:  BSF    01.6
+0082:  BRA    0090
+0084:  BCF    01.6
+0086:  DECFSZ 01,F
+0088:  BRA    0076
+008A:  BRA    008C
+008C:  NOP   
+008E:  BSF    F8B.6
+0090:  MOVLW  1C
+0092:  MOVWF  FE9
+0094:  DECFSZ FE9,F
+0096:  BRA    0094
+0098:  BRA    009A
+009A:  BTFSC  01.7
+009C:  BRA    0074
+009E:  BTFSC  01.6
+00A0:  BRA    0084
+00A2:  RETURN 0
+....................  
+.................... #define clock_pin	PIN_C0 
+.................... #define data_pin	PIN_C1 
+.................... #define delay		10 
+.................... #define clear_pin	PIN_C2 
+....................  
+.................... void clock() { 
+.................... 	output_high(clock_pin); 
+*
+002C:  BCF    F94.0
+002E:  BSF    F8B.0
+.................... 	delay_ms(delay); 
+0030:  MOVLW  0A
+0032:  MOVWF  08
+0034:  RCALL  0004
+.................... 	output_low(clock_pin); 
+0036:  BCF    F94.0
+0038:  BCF    F8B.0
+003A:  GOTO   005A (RETURN)
+.................... } 
+....................  
+.................... void clear() { 
+.................... 	output_low(clear_pin); 
+*
+0178:  BCF    F94.2
+017A:  BCF    F8B.2
+.................... 	delay_ms(delay); 
+017C:  MOVLW  0A
+017E:  MOVWF  08
+0180:  RCALL  0004
+.................... 	output_high(clear_pin); 
+0182:  BCF    F94.2
+0184:  BSF    F8B.2
+.................... 	delay_ms(delay); 
+0186:  MOVLW  0A
+0188:  MOVWF  08
+018A:  RCALL  0004
+018C:  GOTO   01F0 (RETURN)
+.................... } 
+....................  
+.................... void sendL(int data) { 
+.................... 	int mask = 1; 
+....................  
+.................... 	for (mask = 0x80; mask >= 1; mask >>= 1) { 
+.................... 		output_bit(data_pin, data & mask); 
+.................... 		clock(); 
+.................... 	} 
+.................... } 
+....................  
+.................... void sendR(int data) { 
+*
+003E:  MOVLW  01
+0040:  MOVWF  07
+.................... 	int mask = 1; 
+....................  
+.................... 	for (mask = 1; mask <= 0x80; mask <<= 1) { 
+0042:  MOVWF  07
+0044:  MOVF   07,W
+0046:  SUBLW  80
+0048:  BNC   0060
+.................... 		output_bit(data_pin, data & mask); 
+004A:  MOVF   06,W
+004C:  ANDWF  07,W
+004E:  BNZ   0054
+0050:  BCF    F8B.1
+0052:  BRA    0056
+0054:  BSF    F8B.1
+0056:  BCF    F94.1
+.................... 		clock(); 
+0058:  BRA    002C
+005A:  BCF    FD8.0
+005C:  RLCF   07,F
+005E:  BRA    0044
+.................... 	} 
+0060:  GOTO   01CA (RETURN)
+.................... } 
+....................  
+.................... int main(void) { 
+*
+0190:  CLRF   FF8
+0192:  BCF    FD0.7
+0194:  BCF    F94.6
+0196:  BSF    F8B.6
+0198:  MOVLW  00
+019A:  MOVWF  F7E
+019C:  BCF    FC1.4
+019E:  BCF    FC1.5
+01A0:  MOVF   F7F,W
+01A2:  ANDLW  E0
+01A4:  MOVWF  F7F
+01A6:  BCF    F79.5
+01A8:  BCF    F79.4
+01AA:  CLRF   F7A
+01AC:  CLRF   F7B
+01AE:  CLRF   05
+....................  
+.................... 	int cont = 0; 
+....................  
+.................... 	output_high(clear_pin); 
+01B0:  BCF    F94.2
+01B2:  BSF    F8B.2
+.................... 	delay_ms(10); 
+01B4:  MOVLW  0A
+01B6:  MOVWF  08
+01B8:  RCALL  0004
+....................  
+.................... 	for (cont = 1; cont < 11; cont++) { 
+01BA:  MOVLW  01
+01BC:  MOVWF  05
+01BE:  MOVF   05,W
+01C0:  SUBLW  0A
+01C2:  BNC   01F4
+.................... 		sendR(cont); 
+01C4:  MOVFF  05,06
+01C8:  BRA    003E
+.................... 		printf("\n\r%d", cont); 
+01CA:  MOVLW  0A
+01CC:  MOVWF  0C
+01CE:  RCALL  0064
+01D0:  MOVLW  0D
+01D2:  MOVWF  0C
+01D4:  RCALL  0064
+01D6:  MOVFF  05,06
+01DA:  MOVLW  18
+01DC:  MOVWF  07
+01DE:  BRA    00CC
+.................... 		delay_ms(750); 
+01E0:  MOVLW  03
+01E2:  MOVWF  06
+01E4:  MOVLW  FA
+01E6:  MOVWF  08
+01E8:  RCALL  0004
+01EA:  DECFSZ 06,F
+01EC:  BRA    01E4
+.................... 		clear(); 
+01EE:  BRA    0178
+01F0:  INCF   05,F
+01F2:  BRA    01BE
+.................... 	} 
+....................  
+.................... 	return 0; 
+01F4:  MOVLW  00
+01F6:  MOVWF  01
+.................... } 
+01F8:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CF00   FCMEN IESO
+   Word  2: 1E1E   PUT BROWNOUT BORV18 NOWDT WDT32768
+   Word  3: 8F00   CCP2C1 PBADEN LPT1OSC HFOFST MCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

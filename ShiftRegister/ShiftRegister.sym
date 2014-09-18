@@ -1,0 +1,79 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+005     MAIN.cont
+006     sendR.data
+006     @PRINTF_D_634.P1
+006     MAIN.@SCRATCH1
+007     sendR.mask
+007     @PRINTF_D_634.P1
+008     @delay_ms1.P1
+008     @PRINTF_D_634.@SCRATCH1
+009     @PRINTF_D_634.@SCRATCH2
+00A     @PRINTF_D_634.@SCRATCH3
+00B     @PRINTF_D_634.@SCRATCH4
+00C     @PUTCHAR_1_.P1
+00C     @DIV88.P2
+00D     @DIV88.P1
+00E     @DIV88.@SCRATCH1
+F7A.6   C2OUT
+F7B.6   C1OUT
+F83     PSP_DATA
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  @delay_ms1
+00002C  clock
+00003E  sendR
+000064  @PUTCHAR_1_
+0000A4  @DIV88
+0000CC  @PRINTF_D_634
+000178  clear
+000190  MAIN
+000190  @cinit1
+0001AE  @cinit2
+
+Project Directory:
+    C:\Users\cuki\workspace\ShiftRegister\
+
+Project Files:
+    ShiftRegister.c                                         [30-Mar-14 20:21  CRC=391A6396]
+    ..\..\..\..\PICC\devices\18F45K20.h                     [03-Jul-13 13:29  CRC=60B69EC2]
+
+Source signature=FA87A11A
+
+Units:
+    ShiftRegister (main)
+
+Compiler Settings:
+    Processor:      PIC18F45K20
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      ShiftRegister.err
+    INHX32:      ShiftRegister.hex
+    Symbols:     ShiftRegister.sym
+    List:        ShiftRegister.lst
+    Debug/COFF:  ShiftRegister.cof
+    Project:     ShiftRegister.ccspjt
+    Call Tree:   ShiftRegister.tre
+    Statistics:  ShiftRegister.STA

@@ -1,0 +1,51 @@
+
+ROM used:   506/16384 (2%)
+            506/16384 (2%) including unused fragments
+
+            0.6 Average locations per line
+            21.1 Average locations per statement
+
+RAM used:   6/1536 (0%) at main() level
+            14/1536 (1%) worst case
+
+Stack used: 3 worst case (3 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   65    24 100  ShiftRegister.c
+  848     0   0  ..\..\..\..\PICC\devices\18F45K20.h
+----- -----
+  913    24 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   4    1             @delay_ms1
+0     64   6    1             @PUTCHAR_1_
+0     18   2    0    48  1.1  clock
+0     24   2    0    67  1.2  clear
+0     38   4    2   160  4.2  sendR
+0    106  10    2   249  4.0  MAIN
+0     40   4    3             @DIV88
+0    172  17    6             @PRINTF_D_634
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              24
+    Comments                157
+    Volume (V)              745
+    Difficulty (D)          9.6
+    Effort to implement (E) 7149
+    Time to implement (T)   7 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    101
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-07FFE   502  32262  
+
+
+

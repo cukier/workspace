@@ -1,0 +1,16 @@
+[PROJECT]
+Target=ShiftRegister.hex
+Processor_Text=PIC18F45K20
+CCSVersion=5.008
+Compiler=PCH
+[Target Data]
+FileList=ShiftRegister.c
+[Directories]
+Include=C:\PICC\devices\;C:\PICC\drivers\
+[ShiftRegister.c]
+Type=4
+[mru-list]
+1=ShiftRegister.c
+[Units]
+Count=1
+1=ShiftRegister (main)
