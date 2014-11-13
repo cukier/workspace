@@ -34,7 +34,7 @@ AnguloFinal.exe: $(OBJS) $(USER_OBJS)
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C_DEPS)$(EXECUTABLES) AnguloFinal.exe
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) AnguloFinal.exe
 	-@echo ' '
 
 .PHONY: all clean dependents
