@@ -6,19 +6,52 @@
  */
 
 #include<stdio.h>
+#include<stdlib.h>
 #include<stdbool.h>
 
 #define maxSetores		6
 
-typedef struct _setor {
+typedef struct setor_str {
 	int angulo;
 } setor_type;
 
-typedef struct _pivo {
+typedef struct pivo_str {
 	setor_type setor[maxSetores];
 	int nrSetores;
 	int anguloOperacao;
 } pivo_type;
+
+bool mudouAngulo(int *angulo, int *anguloAux);
+int trataAngulo(int *angulo, int *anguloAux);
+int trataNrSetores(pivo_type *pivo);
+int somatorio(pivo_type *pivo);
+int corrigeAngulos(pivo_type *pivo);
+int mostraPivo(pivo_type *pivo);
+int setAngulo(pivo_type *pivo, int setor, int angulo);
+int testaPivo(bool result, pivo_type *pivo);
+
+int main(int argc, char **argv) {
+
+	pivo_type pivo;
+
+	pivo.nrSetores = 4;
+	pivo.anguloOperacao = 100;
+
+	trataNrSetores(&pivo);
+
+	mostraPivo(&pivo);
+
+	setAngulo(&pivo, 1, 10);
+
+	testaPivo(corrigeAngulos(&pivo), &pivo);
+
+	setAngulo(&pivo, 2, 700);
+
+	testaPivo(corrigeAngulos(&pivo), &pivo);
+
+	return 0;
+
+}
 
 bool mudouAngulo(int *angulo, int *anguloAux) {
 	int i = 0;
@@ -101,11 +134,9 @@ int mostraPivo(pivo_type *pivo) {
 int setAngulo(pivo_type *pivo, int setor, int angulo) {
 	if (pivo->setor[setor].angulo != angulo) {
 		if (pivo->setor[setor].angulo > angulo)
-			printf("Diminuindo o setor %d para %d graus.\n", setor + 1,
-					angulo);
+			printf("Diminuindo o setor %d para %d graus.\n", setor + 1, angulo);
 		else
-			printf("Aumentando o setor %d para %d graus.\n", setor + 1,
-					angulo);
+			printf("Aumentando o setor %d para %d graus.\n", setor + 1, angulo);
 		pivo->setor[setor].angulo = angulo;
 	} else
 		printf(
@@ -114,37 +145,11 @@ int setAngulo(pivo_type *pivo, int setor, int angulo) {
 	return 0;
 }
 
-int main(int argc, char **argv) {
-
-	int result = 0;
-
-	pivo_type pivo;
-
-	pivo.nrSetores = 4;
-	pivo.anguloOperacao = 300;
-
-	trataNrSetores(&pivo);
-
-	mostraPivo(&pivo);
-
-	setAngulo(&pivo, 1, 10);
-
-	result = corrigeAngulos(&pivo);
-
-	if (!result)
-		mostraPivo(&pivo);
+int testaPivo(bool result, pivo_type *pivo) {
+	if (result)
+		exit(result);
 	else
-		return result;
-
-	setAngulo(&pivo, 0, 700);
-
-	result = corrigeAngulos(&pivo);
-
-	if (!result)
-		mostraPivo(&pivo);
-	else
-		return result;
+		mostraPivo(pivo);
 
 	return 0;
-
 }
