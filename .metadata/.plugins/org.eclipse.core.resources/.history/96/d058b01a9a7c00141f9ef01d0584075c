@@ -1,0 +1,55 @@
+/*
+ * serial.c
+ *
+ *  Created on: 05/12/2014
+ *      Author: cuki
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <termios.h>
+#include <stdlib.h>
+
+int open_port(void) {
+	int fd;
+
+	fd = open("COM1", O_RDWR | O_NOCTTY | O_NDELAY);
+
+	if (fd == -1) {
+		fprintf(stderr, "No door\n%s\n", strerror(errno));
+		exit(-1);
+	}
+
+	return fd;
+}
+
+int main(int argc, char **argv) {
+
+	int fd, n;
+	struct termios options;
+	char str[16];
+
+	fd = open_port();
+
+	tcgetattr(fd, &options);
+	cfsetispeed(&options, B9600);
+	cfsetospeed(&options, B9600);
+	options.c_cflag |= (CLOCAL | CREAD);
+	tcsetattr(fd, TCSANOW, &options);
+
+	strcpy(str, "\fHello");
+
+	printf("Tamanho da mensagem %d", (int) sizeof(str));
+
+	n = write(fd, str, sizeof(str));
+
+	printf("\nEnviados %d bytes", n);
+
+	close(fd);
+
+	return 0;
+
+}
